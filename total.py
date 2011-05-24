@@ -23,7 +23,7 @@ def main():
         if len(items) < 3:
             continue
         urlinfo = urlparse(items[2])
-        query = parse_qs(urlinfo.query)
+        query = parse_qs(urlinfo[4])
         app = query.get('app')
         if not app:
             continue
