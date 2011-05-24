@@ -4,17 +4,16 @@
 
 * 自定义API
 
-## 自定义API
+## 自定义API举例
 
-### 默认生成的API
-
-活跃API: /active?uid=$uid
+活跃API: /active?uid=$uid&account_count=$account_count
 
 参数名对应表:
 
 <table>
     <tr>
         <th>key</th>
+        <th>默认值</th>
         <th>含义</th>
         <th>描述</th>
     </tr>
