@@ -2,7 +2,11 @@
 
 from datetime import datetime, timedelta
 from os import path
-from urlparse import parse_qs, urlparse
+from urlparse import urlparse
+try:
+    from urlparse import parse_qs
+except:
+    from cgi import parse_qs
 import json
 
 def main():
