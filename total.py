@@ -7,7 +7,10 @@ try:
     from urlparse import parse_qs
 except:
     from cgi import parse_qs
-import json
+try:
+    import json
+except:
+    import simplejson as json
 
 def main():
     now = datetime.now() - timedelta(days=1)
