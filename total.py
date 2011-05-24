@@ -51,8 +51,11 @@ def main():
                 app_result[k] = app_result.get(k, 0) + user_total[k]
         result[app] = app_result
     print result
-    with open(logpath + '.json', 'wb') as f:
+    f = open(logpath + '.json', 'wb')
+    try:
         f.write(json.dumps({'total': result, 'date': now.strftime('%Y-%m-%d')}))
+    finally:
+        f.close()
     
     
 if __name__ == '__main__':
