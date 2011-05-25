@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import sys
 from datetime import datetime, timedelta
 from os import path
 from urlparse import urlparse
@@ -13,7 +13,10 @@ except:
     import simplejson as json
 
 def main():
-    now = datetime.now() - timedelta(days=1)
+    days = 1
+    if len(sys.argv) == 2:
+        days = int(sys.argv[1])
+    now = datetime.now() - timedelta(days=days)
     dirpath = path.dirname(path.realpath(__file__))
     logpath = path.join(dirpath, 'log/%d/%d/%d.log' % (now.year, now.month, now.day))
     # 125.120.145.106|1306260420128|/log?at=popup&app=fawave&uid=kdkhkblabbkmgfjfpbijlbijdemdodol&v=2011.3.3.0|Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_7) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.60 Safari/534.30
