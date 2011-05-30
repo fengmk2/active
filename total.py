@@ -31,34 +31,47 @@ def main():
         if not app:
             continue
         app = app[0]
-        uid = query.get('uid')
-        if not uid:
-            continue
-        uid = uid[0]
+        ip = items[0]
+#        uid = query.get('uid')
+#        if not uid:
+#            continue
+#        uid = uid[0]
         app_total = total.get(app, {})
-        user_total = app_total.get(uid, {})
+        ip_total = app_total.get(app, {})
+#        user_total = app_total.get(uid, {})
         active = query.get('at', query.get('active'))
         if active:
             active = active[0]
-            user_total[active] = user_total.get(active, 0) + 1
+            ip_total[active] = ip_total.get(active, 0) + 1
+#            user_total[active] = user_total.get(active, 0) + 1
         version = query.get('v')
         if version:
             version = version[0]
             k = 'version_' + version
-            user_total[k] = user_total.get(k, 0) + 1
-        app_total[uid] = user_total;
+            ip_total[k] = ip_total.get(k, 0) + 1
+#            user_total[k] = user_total.get(k, 0) + 1
+#        app_total[uid] = user_total;
+        app_total[ip] = ip_total
         total[app] = app_total
     result = {}
     for app in total:
         app_total = total[app]
         app_result = result.get(app, {})
-        app_result['users'] = len(app_total)
-        for uid in app_total:
-            user_total = app_total[uid]
-            for k in user_total:
-                key = k + '_users'
+        app_result['ip'] = len(app_total)
+#        app_result['users'] = len(app_total)
+        for ip in app_total:
+            ip_total = app_total[ip]
+            for k in ip_total:
+                key = k + '_ip'
                 app_result[key] = app_result.get(key, 0) + 1
-                app_result[k] = app_result.get(k, 0) + user_total[k]
+                app_result[k] = app_result.get(k, 0) + ip_total[k]
+#                
+#        for uid in app_total:
+#            user_total = app_total[uid]
+#            for k in user_total:
+#                key = k + '_users'
+#                app_result[key] = app_result.get(key, 0) + 1
+#                app_result[k] = app_result.get(k, 0) + user_total[k]
         result[app] = app_result
     print result
     f = open(logpath + '.json', 'wb')
