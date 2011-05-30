@@ -37,7 +37,7 @@ def main():
 #            continue
 #        uid = uid[0]
         app_total = total.get(app, {})
-        ip_total = app_total.get(app, {})
+        ip_total = app_total.get(ip, {})
 #        user_total = app_total.get(uid, {})
         active = query.get('at', query.get('active'))
         if active:
